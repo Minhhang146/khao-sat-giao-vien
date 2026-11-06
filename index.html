@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khảo Sát Ý Kiến Giáo Viên - Kiệt Sức Học Đường</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --border: #cbd5e1;
+    }
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px 12px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .header-card {
+      background: var(--card);
+      border-top: 8px solid var(--primary);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .header-card h1 {
+      margin: 0 0 10px 0;
+      font-size: 22px;
+      color: var(--primary-dark);
+    }
+    .header-card p {
+      margin: 0;
+      font-size: 15px;
+      color: #475569;
+    }
+    .section-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .section-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      color: #0f172a;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label.field-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .required {
+      color: #dc2626;
+    }
+    input[type="text"], input[type="number"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .question-item {
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: #f8fafc;
+    }
+    .question-text {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .options-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      user-select: none;
+    }
+    .radio-label input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    button[type="submit"] {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      transition: background 0.2s;
+    }
+    button[type="submit"]:hover {
+      background: var(--primary-dark);
+    }
+    button[type="submit"]:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    #statusMessage {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header-card">
+    <h1>PHIẾU KHẢO SÁT Ý KIẾN GIÁO VIÊN</h1>
+    <p>
+      Đề tài KHKT: <b>"Hệ thống dự báo nguy cơ kiệt sức học đường và gợi ý lịch sinh hoạt cân bằng"</b>.<br>
+      Kính mong Quý Thầy/Cô dành ít phút cho ý kiến chuyên môn để nhóm nghiên cứu có cơ sở thực tiễn xây dựng mô hình. Trân trọng cảm ơn Thầy/Cô!
+    </p>
+  </div>
+
+  <form id="teacherSurveyForm">
+    <!-- PHẦN 1: THÔNG TIN CHUNG -->
+    <div class="section-card">
+      <span class="section-badge">Phần 1 / 3</span>
+      <h2 class="section-title">Thông tin chung của Giáo viên</h2>
+      <div class="section-desc">Các thông tin dưới đây phục vụ mục đích thống kê khoa học của đề tài.</div>
+
+      <div class="form-group">
+        <label class="field-label">Họ và tên giáo viên: <span class="required">*</span></label>
+        <input type="text" id="ho_ten" required placeholder="Nhập họ và tên của Thầy/Cô...">
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Cơ sở công tác:</label>
+        <input type="text" id="co_so" placeholder="Tên trường hoặc đơn vị công tác...">
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Chuyên môn: <span class="required">*</span></label>
+        <input type="text" id="chuyen_mon" required placeholder="Môn giảng dạy hoặc lĩnh vực chuyên môn...">
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Số năm kinh nghiệm: <span class="required">*</span></label>
+        <input type="text" id="kinh_nghiem" required placeholder="Ví dụ: 5 năm...">
+      </div>
+    </div>
+
+    <!-- PHẦN 2: TRIỆU CHỨNG KIỆT SỨC -->
+    <div class="section-card">
+      <span class="section-badge">Phần 2 / 3</span>
+      <h2 class="section-title">Khảo sát dấu hiệu, triệu chứng kiệt sức ở học sinh</h2>
+      <div class="section-desc">
+        Sau đây là phiếu xin ý kiến Thầy/Cô về các dấu hiệu thể hiện triệu chứng kiệt sức ở học sinh. Thầy/Cô cho xin ý kiến bằng cách chọn <b>Đồng ý / Không đồng ý</b>.
+      </div>
+
+      <div id="symptomsContainer"></div>
+
+      <div class="form-group" style="margin-top: 20px;">
+        <label class="field-label">Ý kiến bổ sung nếu có (về các triệu chứng khác):</label>
+        <textarea id="ykien_tc" rows="2" placeholder="Văn bản câu trả lời ngắn..."></textarea>
+      </div>
+    </div>
+
+    <!-- PHẦN 3: NGUYÊN NHÂN KIỆT SỨC -->
+    <div class="section-card">
+      <span class="section-badge">Phần 3 / 3</span>
+      <h2 class="section-title">Khảo sát nguyên nhân gây ra kiệt sức ở học sinh</h2>
+      <div class="section-desc">
+        Sau đây là phiếu xin ý kiến Thầy/Cô về các nguyên nhân gây ra kiệt sức ở học sinh. Thầy/Cô lựa chọn <b>Đồng ý / Không đồng ý</b> cho các nguyên nhân sau đây.
+      </div>
+
+      <div id="causesContainer"></div>
+
+      <div class="form-group" style="margin-top: 20px;">
+        <label class="field-label">Ý kiến bổ sung nếu có (về các nguyên nhân khác):</label>
+        <textarea id="ykien_nn" rows="2" placeholder="Văn bản câu trả lời ngắn..."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" id="submitBtn">Gửi Phiếu Khảo Sát</button>
+    <div id="statusMessage"></div>
+  </form>
+</div>
+
+<script>
+  // ĐƯỜNG LINK WEB APP URL CỦA EM ĐÃ ĐƯỢC GHÉP SẴN TẠI ĐÂY
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwVgryrUx5fJItZYoqwoLfMyfmRPsmX5gc_Zq58FxSyXC41eq8reUnp3Ul06DUFvbn9Ag/exec';
+
+  // Danh sách 11 câu hỏi Triệu chứng (Phần 2)
+  const symptomsList = [
+    { id: 'tc_1', text: '1. Học sinh ghi nhớ, tiếp nhận kiến thức chậm hơn bình thường.' },
+    { id: 'tc_2', text: '2. Thường xuyên trong trạng thái mệt mỏi, uể oải.' },
+    { id: 'tc_3', text: '3. Bị rối loạn tiêu hóa, ăn uống kém hoặc khó tiêu.' },
+    { id: 'tc_4', text: '4. Cảm thấy chán nản, ngán ngẩm khi ngồi vào bàn học, làm bài tập.' },
+    { id: 'tc_5', text: '5. Dễ cáu gắt hơn với những việc nhỏ xung quanh.' },
+    { id: 'tc_6', text: '6. Cảm thấy bản thân kém cỏi, không bằng người khác.' },
+    { id: 'tc_7', text: '7. Thường xuyên bị đau đầu, cơ thể không khỏe mỗi khi bước vào giờ học.' },
+    { id: 'tc_8', text: '8. Bị rối loạn giấc ngủ, thức khuya vào ban đêm, và ngủ gật trên lớp.' },
+    { id: 'tc_9', text: '9. Thường xuyên quên lịch kiểm tra, đồ đạc, dụng cụ học tập.' },
+    { id: 'tc_10', text: '10. Liên tục trì hoãn việc học, ngồi lướt điện thoại trong vô thức để né tránh sách vở.' },
+    { id: 'tc_11', text: '11. Thường xuyên mất tập trung trong lúc học tập, làm bài.' }
+  ];
+
+  // Danh sách 6 câu hỏi Nguyên nhân (Phần 3)
+  const causesList = [
+    { id: 'nn_1', text: '1. Các kỳ thi, kiểm tra diễn ra liên tục khiến thời gian ôn tập bị nén chặt.' },
+    { id: 'nn_2', text: '2. Lịch học dày đặc trong ngày, không có ngày nghỉ trọn vẹn trong tuần.' },
+    { id: 'nn_3', text: '3. Gia đình đặt kỳ vọng quá cao vào học sinh. Học sinh hình thành áp lực về điểm số.' },
+    { id: 'nn_4', text: '4. Bài tập về nhà của nhiều môn dồn lại cùng một lúc trong khoảng thời gian ngắn.' },
+    { id: 'nn_5', text: '5. Góc học tập thiếu ánh sáng, ồn ào hoặc không gian học tập gây xao nhãng.' },
+    { id: 'nn_6', text: '6. Gia đình có việc phát sinh làm đảo lộn lịch sinh hoạt.' }
+  ];
+
+  function renderQuestions(list, containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = list.map(q => `
+      <div class="question-item">
+        <div class="question-text">${q.text} <span class="required">*</span></div>
+        <div class="options-row">
+          <label class="radio-label">
+            <input type="radio" name="${q.id}" value="Đồng ý" required> Đồng ý
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="${q.id}" value="Không đồng ý"> Không đồng ý
+          </label>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  renderQuestions(symptomsList, 'symptomsContainer');
+  renderQuestions(causesList, 'causesContainer');
+
+  const form = document.getElementById('teacherSurveyForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusDiv = document.getElementById('statusMessage');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Đang gửi dữ liệu... Vui lòng đợi...';
+    statusDiv.style.display = 'none';
+
+    const payload = {
+      ho_ten: document.getElementById('ho_ten').value.trim(),
+      co_so: document.getElementById('co_so').value.trim(),
+      chuyen_mon: document.getElementById('chuyen_mon').value.trim(),
+      kinh_nghiem: document.getElementById('kinh_nghiem').value.trim(),
+      ykien_tc: document.getElementById('ykien_tc').value.trim(),
+      ykien_nn: document.getElementById('ykien_nn').value.trim()
+    };
+
+    symptomsList.forEach(q => {
+      payload[q.id] = document.querySelector(`input[name="${q.id}"]:checked`)?.value || '';
+    });
+
+    causesList.forEach(q => {
+      payload[q.id] = document.querySelector(`input[name="${q.id}"]:checked`)?.value || '';
+    });
+
+    fetch(scriptURL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      statusDiv.style.display = 'block';
+      statusDiv.style.backgroundColor = '#dcfce7';
+      statusDiv.style.color = '#166534';
+      statusDiv.innerText = 'Cảm ơn Quý Thầy/Cô! Phiếu khảo sát đã được gửi thành công.';
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Gửi Phiếu Khảo Sát';
+    })
+    .catch(() => {
+      statusDiv.style.display = 'block';
+      statusDiv.style.backgroundColor = '#fee2e2';
+      statusDiv.style.color = '#991b1b';
+      statusDiv.innerText = 'Có lỗi kết nối xảy ra, vui lòng kiểm tra mạng và thử lại!';
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Gửi Phiếu Khảo Sát';
+    });
+  });
+</script>
+
+</body>
+</html>
